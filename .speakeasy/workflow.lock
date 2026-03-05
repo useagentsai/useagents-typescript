@@ -1,0 +1,39 @@
+speakeasyVersion: 1.634.2
+sources:
+    UseAgents API:
+        sourceNamespace: use-agents-api
+        sourceRevisionDigest: sha256:03866768cd6cf805d929de8147e268db98adb1ff3d0f219ec83b66e267146006
+        sourceBlobDigest: sha256:46bc2a0a4cefe4ae5118cbc438f3413a4c88d74389f9209b62867907402e3547
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    use-agents:
+        source: UseAgents API
+        sourceNamespace: use-agents-api
+        sourceRevisionDigest: sha256:03866768cd6cf805d929de8147e268db98adb1ff3d0f219ec83b66e267146006
+        sourceBlobDigest: sha256:46bc2a0a4cefe4ae5118cbc438f3413a4c88d74389f9209b62867907402e3547
+        codeSamplesNamespace: use-agents-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:a8de3aadb63090779f4fcd189db4aebb74d9472ee43af1f729a876fbf09bc73d
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        UseAgents API:
+            inputs:
+                - location: https://api.useagents.site/openapi
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/useagents/useagents/use-agents-api
+    targets:
+        use-agents:
+            target: typescript
+            source: UseAgents API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/useagents/useagents/use-agents-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

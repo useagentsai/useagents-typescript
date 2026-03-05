@@ -1,0 +1,295 @@
+openapi: "3.1.0"
+info:
+  title: "UseAgents API"
+  description: "API for discovering and managing AI agent tools."
+  version: "1.0.0"
+servers:
+  - url: "https://api.useagents.site"
+    description: "API server"
+tags:
+  - name: "Tools"
+    description: "Search and discover AI agent tools"
+components:
+  schemas:
+    "MissingApiKeyError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 401
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "missing_api_key"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "Missing API key in the authorization header."
+          required:
+            - "status"
+            - "code"
+            - "message"
+      required:
+        - "error"
+    "InvalidApiKeyError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 403
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "invalid_api_key"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "API key is invalid."
+          required:
+            - "status"
+            - "code"
+            - "message"
+      required:
+        - "error"
+    "NotFoundError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 404
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "not_found"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "The requested endpoint does not exist."
+          required:
+            - "status"
+            - "code"
+            - "message"
+      required:
+        - "error"
+    "MethodNotAllowedError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 405
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "method_not_allowed"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "Method is not allowed for the requested path."
+          required:
+            - "status"
+            - "code"
+            - "message"
+      required:
+        - "error"
+    "ValidationError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 422
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "validation_error"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "We found an error with one or more fields in the request."
+            "validation":
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  "field":
+                    type: "string"
+                    description: "The name of the field that failed validation"
+                    example: "q"
+                  "message":
+                    type: "string"
+                    description: "The validation error message for the field"
+                    example: "Required"
+                required:
+                  - "field"
+                  - "message"
+              description: "List of field-specific validation issues"
+          required:
+            - "status"
+            - "code"
+            - "message"
+            - "validation"
+      required:
+        - "error"
+    "RateLimitExceededError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 429
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "rate_limit_exceeded"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "You have exceeded your request limit. Please try again later."
+          required:
+            - "status"
+            - "code"
+            - "message"
+      required:
+        - "error"
+    "InternalServerError":
+      type: "object"
+      properties:
+        "error":
+          type: "object"
+          properties:
+            "status":
+              type: "number"
+              description: "HTTP status code of the error"
+              example: 500
+            "code":
+              type: "string"
+              description: "Machine-readable error name"
+              example: "internal_server_error"
+            "message":
+              type: "string"
+              description: "Human-readable error message"
+              example: "An unexpected error occurred."
+          required:
+            - "status"
+            - "code"
+            - "message"
+      required:
+        - "error"
+paths:
+  "/tools/search":
+    get:
+      tags:
+        - "Tools"
+      summary: "Search tools"
+      description: "Search for AI agent tools by query. Returns JSON results."
+      operationId: "searchTools"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Search query for tools"
+          required: true
+          description: "Search query for tools"
+          name: "q"
+          in: "query"
+      responses:
+        "200":
+          description: "JSON search results"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "results":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "id":
+                          type: "string"
+                        "name":
+                          type: "string"
+                        "description":
+                          type: "string"
+                        "shortDescription":
+                          type: "string"
+                        "languages":
+                          type: "array"
+                          items:
+                            type: "string"
+                        "categories":
+                          type: "array"
+                          items:
+                            type: "string"
+                        "slug":
+                          type: "string"
+                        "image":
+                          type: "string"
+                      required:
+                        - "id"
+                        - "name"
+                        - "description"
+                        - "shortDescription"
+                        - "languages"
+                        - "categories"
+                        - "slug"
+                        - "image"
+                required:
+                  - "results"
+        "401":
+          description: "Missing API Key Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/MissingApiKeyError"}
+        "403":
+          description: "Invalid API Key Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/InvalidApiKeyError"}
+        "404":
+          description: "Not Found Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/NotFoundError"}
+        "405":
+          description: "Method Not Allowed Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/MethodNotAllowedError"}
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ValidationError"}
+        "429":
+          description: "Rate Limit Exceeded Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/RateLimitExceededError"}
+        "500":
+          description: "Internal Server Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/InternalServerError"}
+      x-speakeasy-name-override: "search"

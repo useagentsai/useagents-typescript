@@ -1,0 +1,19 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/tools/search"]["get"]
+    update:
+      x-speakeasy-name-override: search
+    x-speakeasy-metadata:
+      after: sdk.tools.search()
+      before: sdk.Tools.searchTools()
+      created_at: 1772703839956
+      reviewed_at: 1772703863311
+      type: method-name

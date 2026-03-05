@@ -1,0 +1,142 @@
+lockVersion: 2.0.0
+id: f12f4d5e-cf2d-4ab1-94dd-b9d80fd76441
+management:
+  docChecksum: 452bff01d2168be62bf99150c5df7367
+  docVersion: 1.0.0
+  speakeasyVersion: 1.634.2
+  generationVersion: 2.721.3
+  releaseVersion: 0.1.1
+  configChecksum: 507ab993ed0d6964d9a571439d5a0506
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    core: 3.21.26
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.1
+    envVarSecurityUsage: 0.1.2
+    globalSecurityCallbacks: 0.1.0
+    globalServerURLs: 2.82.5
+    methodArguments: 0.1.2
+    nameOverrides: 2.81.2
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.3.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/errors/internalservererror.md
+  - docs/models/errors/invalidapikeyerror.md
+  - docs/models/errors/methodnotallowederror.md
+  - docs/models/errors/missingapikeyerror.md
+  - docs/models/errors/notfounderror.md
+  - docs/models/errors/ratelimitexceedederror.md
+  - docs/models/errors/validationerror.md
+  - docs/models/internalservererrorerror.md
+  - docs/models/invalidapikeyerrorerror.md
+  - docs/models/methodnotallowederrorerror.md
+  - docs/models/missingapikeyerrorerror.md
+  - docs/models/notfounderrorerror.md
+  - docs/models/operations/result.md
+  - docs/models/operations/searchtoolsrequest.md
+  - docs/models/operations/searchtoolsresponse.md
+  - docs/models/ratelimitexceedederrorerror.md
+  - docs/models/validation.md
+  - docs/models/validationerrorerror.md
+  - docs/sdks/tools/README.md
+  - docs/sdks/useagents/README.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/package.json
+  - examples/toolsSearch.example.ts
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/toolsSearch.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/internalservererror.ts
+  - src/models/errors/invalidapikeyerror.ts
+  - src/models/errors/methodnotallowederror.ts
+  - src/models/errors/missingapikeyerror.ts
+  - src/models/errors/notfounderror.ts
+  - src/models/errors/ratelimitexceedederror.ts
+  - src/models/errors/responsevalidationerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/useagentsdefaulterror.ts
+  - src/models/errors/useagentserror.ts
+  - src/models/errors/validationerror.ts
+  - src/models/index.ts
+  - src/models/internalservererror.ts
+  - src/models/invalidapikeyerror.ts
+  - src/models/methodnotallowederror.ts
+  - src/models/missingapikeyerror.ts
+  - src/models/notfounderror.ts
+  - src/models/operations/index.ts
+  - src/models/operations/searchtools.ts
+  - src/models/ratelimitexceedederror.ts
+  - src/models/validationerror.ts
+  - src/sdk/index.ts
+  - src/sdk/sdk.ts
+  - src/sdk/tools.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  searchTools:
+    speakeasy-default-search-tools:
+      parameters:
+        query:
+          q: "<value>"
+      responses:
+        "200":
+          application/json: {"results": []}
+        "401":
+          application/json: {"error": {"status": 401, "code": "missing_api_key", "message": "Missing API key in the authorization header."}}
+        "403":
+          application/json: {"error": {"status": 403, "code": "invalid_api_key", "message": "API key is invalid."}}
+        "404":
+          application/json: {"error": {"status": 404, "code": "not_found", "message": "The requested endpoint does not exist."}}
+        "405":
+          application/json: {"error": {"status": 405, "code": "method_not_allowed", "message": "Method is not allowed for the requested path."}}
+        "422":
+          application/json: {"error": {"status": 422, "code": "validation_error", "message": "We found an error with one or more fields in the request.", "validation": []}}
+        "429":
+          application/json: {"error": {"status": 429, "code": "rate_limit_exceeded", "message": "You have exceeded your request limit. Please try again later."}}
+        "500":
+          application/json: {"error": {"status": 500, "code": "internal_server_error", "message": "An unexpected error occurred."}}
+examplesVersion: 1.0.2
